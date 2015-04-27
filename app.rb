@@ -16,7 +16,7 @@ module PapertrailWebhook
         url = URI.parse 'https://api.pushbullet.com/v2/pushes'
         params = {
           type: "link",
-          title: "Papertrail: #{payload['saved_saerch']['name']}",
+          title: "Papertrail: #{payload['saved_search']['name']}",
           body: "#{event['message']} at #{event['display_received_at']}",
           url: "#{payload['saved_search']['html_search_url']}?center_on_id=#{event['id']}",
         }
