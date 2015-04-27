@@ -11,14 +11,13 @@ module PapertrailWebhook
 
     post "/webhook/#{ENV['SECRET']}" do
       payload = JSON.parse(params[:payload])
-      p payload
 
       payload['events'].each do |event|
         url = URI.parse 'https://api.pushbullet.com/v2/pushes'
         params = {
           type: "link",
-          title: "Papertrail alert from #{event['hostname']}",
-          body: event['message'],
+          title: "Papertrail: #{payload['saved_saerch']['name']}",
+          body: "#{event['message']} at #{event['display_received_at']}",
           url: "#{payload['saved_search']['html_search_url']}?center_on_id=#{event['id']}",
         }
 
